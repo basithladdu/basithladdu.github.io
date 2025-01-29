@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>GPERC Event Calendar</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet"/>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GPREC Event Calendar</title>
+  
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+  />
   <style>
     * {
       margin: 0;
@@ -14,119 +17,118 @@
     }
 
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(to right, #1c1c1c, #2c2c54);
+      font-family: "JetBrains Mono", monospace;
+      background: linear-gradient(135deg, #1e1e1e, #3f3f3f);
       color: #fff;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      min-height: 100vh;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 20px;
     }
 
     h1 {
-      font-size: 2.4rem;
-      margin-bottom: 0.5rem;
-      animation: fadeInDown 1s ease forwards;
+      margin-top: 20px;
+      font-size: 2rem;
       text-align: center;
+      color: #00bcd4;
+      animation: fadeInDown 0.8s ease-out forwards;
+    }
+
+    .intro-line {
+      text-align: center;
+      font-size: 0.9rem;
+      margin: 10px 0 20px;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
 
     p {
-      font-size: 1rem;
-      margin-bottom: 1.5rem;
       text-align: center;
-      line-height: 1.6;
-      width: 90%;
+      font-size: 14px;
+      margin: 20px 0;
       max-width: 600px;
-      animation: fadeInUp 1s ease forwards;
+      line-height: 1.6;
+      animation: fadeInUp 0.8s ease-out forwards;
     }
 
     .add-calendar {
-      margin-bottom: 2rem;
+      margin: 20px 0;
       text-align: center;
     }
 
     .add-calendar button {
-      display: inline-flex;
-      align-items: center;
-      background-color: #00e5ff;
-      color: #000;
+      padding: 12px 24px;
+      font-size: 16px;
       border: none;
       border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      box-shadow: 0 4px 14px rgba(0, 229, 255, 0.4);
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-    .add-calendar button:hover {
       background-color: #00bcd4;
-      transform: translateY(-3px);
+      color: #000;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 4px 14px rgba(0, 188, 212, 0.4);
     }
 
-    .calendar-icon {
-      width: 1.2rem;
-      height: 1.2rem;
-      margin-right: 8px;
-      fill: currentColor;
+    .add-calendar button:hover {
+      background-color: #0288d1;
+      transform: translateY(-3px);
     }
 
     iframe {
       width: 100%;
-      max-width: 1000px;
+      max-width: 900px;
       height: 600px;
       border: none;
-      border-radius: 10px;
-      box-shadow: 0 4px 14px rgba(0, 229, 255, 0.2);
-      animation: fadeIn 1.5s ease forwards;
+      border-radius: 8px;
+      box-shadow: 0 4px 14px rgba(0, 188, 212, 0.2);
+      animation: fadeIn 0.8s ease-out forwards;
     }
 
     footer {
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: #ccc;
-      animation: fadeIn 2s ease forwards;
+      margin-top: 20px;
       text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      animation: fadeIn 1s ease-out forwards;
     }
+
     footer a {
-      color: #00e5ff;
+      color: #00bcd4;
       text-decoration: none;
-      font-weight: 500;
     }
+
     footer a:hover {
       text-decoration: underline;
     }
 
     @keyframes fadeIn {
-      0% {
+      from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(5px);
       }
-      100% {
+      to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
     @keyframes fadeInDown {
-      0% {
+      from {
         opacity: 0;
-        transform: translateY(-20px);
+        transform: translateY(-10px);
       }
-      100% {
+      to {
         opacity: 1;
         transform: translateY(0);
       }
     }
 
     @keyframes fadeInUp {
-      0% {
+      from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(10px);
       }
-      100% {
+      to {
         opacity: 1;
         transform: translateY(0);
       }
@@ -134,41 +136,35 @@
 
     @media (max-width: 600px) {
       h1 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
       }
-      p {
-        width: 100%;
-      }
-      .add-calendar button {
-        font-size: 0.9rem;
+      iframe {
+        height: 500px;
       }
     }
   </style>
 </head>
 <body>
-
-  <h1>GPERC Event Calendar</h1>
-  
+  <h1>GPREC Event Calendar</h1>
+  <p class="intro-line">
+    Created by <a href="https://www.linkedin.com/in/shaikabdulbasith" target="_blank">Shaik Abdul Basith</a> | Email: <a href="mailto:shaikabdulbasith2107@gmail.com">shaikabdulbasith2107@gmail.com</a>
+  </p>
   <p>
-    Welcome to the GPERC Event Calendar! Stay in the loop with all upcoming events,
-    workshops, and important dates. Add our shared calendar to yours for instant access
-    to everything happening around campus.
+    Centralized event calendar for GPREC. Stay updated by adding it to your own Google Calendar.
   </p>
 
   <div class="add-calendar">
-    <button onclick="addToCalendar()">
-      Add to My Calendar
-    </button>
+    <button onclick="addToCalendar()">Add to Your Calendar</button>
   </div>
 
   <iframe
     id="main-calendar"
     src="https://calendar.google.com/calendar/embed?src=yourmaincalendarid%40group.calendar.google.com&ctz=Asia%2FCalcutta"
-  >
-  </iframe>
+  ></iframe>
 
   <footer>
-    Created with ♥ by <a href="https://www.linkedin.com/in/shaikabdulbasith">Shaik Abdul Basith</a> | Handcrafted Code (No AI)
+    Made with ❤️ by
+    <a href="https://www.linkedin.com/in/shaikabdulbasith" target="_blank">Shaik Abdul Basith</a>
   </footer>
 
   <script>
