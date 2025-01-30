@@ -17,39 +17,25 @@
     }
 
     body {
-      font-family: "JetBrains Mono", monospace;
-      background: linear-gradient(135deg, #1e1e1e, #3f3f3f);
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #1e1e1e;
       color: #fff;
-      min-height: 100vh;
+      margin: 0;
+      padding: 20px; 
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: flex-start;
-      padding: 20px;
     }
 
     h1 {
-      margin-top: 20px;
-      font-size: 2rem;
       text-align: center;
       color: #00bcd4;
-      animation: fadeInDown 0.8s ease-out forwards;
-    }
-
-    .intro-line {
-      text-align: center;
-      font-size: 0.9rem;
-      margin: 10px 0 20px;
-      animation: fadeInUp 0.8s ease-out forwards;
     }
 
     p {
       text-align: center;
       font-size: 14px;
-      margin: 20px 0;
-      max-width: 600px;
-      line-height: 1.6;
-      animation: fadeInUp 0.8s ease-out forwards;
+      margin-bottom: 20px;
     }
 
     .add-calendar {
@@ -58,30 +44,26 @@
     }
 
     .add-calendar button {
-      padding: 12px 24px;
+      padding: 10px 20px;
       font-size: 16px;
       border: none;
       border-radius: 8px;
       background-color: #00bcd4;
       color: #000;
       cursor: pointer;
-      transition: background-color 0.3s ease, transform 0.3s ease;
-      box-shadow: 0 4px 14px rgba(0, 188, 212, 0.4);
+      transition: all 0.3s ease;
     }
 
     .add-calendar button:hover {
       background-color: #0288d1;
-      transform: translateY(-3px);
     }
 
     iframe {
-      width: 100%;
-      max-width: 900px;
-      height: 600px;
+      width: 50%;
+      max-width: 700px;
+      height: 500px;
       border: none;
       border-radius: 8px;
-      box-shadow: 0 4px 14px rgba(0, 188, 212, 0.2);
-      animation: fadeIn 0.8s ease-out forwards;
     }
 
     footer {
@@ -89,7 +71,6 @@
       text-align: center;
       font-size: 12px;
       color: #aaa;
-      animation: fadeIn 1s ease-out forwards;
     }
 
     footer a {
@@ -100,55 +81,12 @@
     footer a:hover {
       text-decoration: underline;
     }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 1.6rem;
-      }
-      iframe {
-        height: 500px;
-      }
-    }
   </style>
 </head>
 <body>
   <h1>GPREC Event Calendar</h1>
-  <p class="intro-line">
-    Created by <a href="https://www.linkedin.com/in/shaikabdulbasith" target="_blank">Shaik Abdul Basith</a> | Email: <a href="mailto:shaikabdulbasith2107@gmail.com">shaikabdulbasith2107@gmail.com</a>
-  </p>
+  <br>
+
   <p>
     Centralized event calendar for GPREC. Stay updated by adding it to your own Google Calendar.
   </p>
@@ -156,15 +94,8 @@
   <div class="add-calendar">
     <button onclick="addToCalendar()">Add to Your Calendar</button>
   </div>
-
-  <iframe
-    id="main-calendar"
-    src="https://calendar.google.com/calendar/embed?src=yourmaincalendarid%40group.calendar.google.com&ctz=Asia%2FCalcutta"
-  ></iframe>
-
-  <footer>
-    Made with ❤️ by
-    <a href="https://www.linkedin.com/in/shaikabdulbasith" target="_blank">Shaik Abdul Basith</a>
+  <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Asia%2FKolkata&mode=WEEK&src=Y182Mjg1YjNkYTkzYjRlMWNlMDM1OGE1MGFmNTlkMGQ2NTE2YmRmOTRjNDI4ZTQyMzVlYWRkNTg0ZGQ3NDI1YWMzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23EF6C00" style="border:solid 1px #777" width="800" height="600" frameborder="0" scrolling="no"></iframe>  <footer>
+    Created by <a href="https://www.linkedin.com/in/basithladoo" target="_blank">Shaik Abdul Basith</a> | Email: <a href="mailto:basithladoo@gmail.com">basithladoo@gmail.com</a>
   </footer>
 
   <script>
