@@ -69,7 +69,7 @@ h1 a {
     color: #000000;
 }
 
-/* Card Container */
+
 .container {
     display: flex;
     flex-direction: row;
@@ -78,7 +78,6 @@ h1 a {
     margin-bottom: 50px;
 }
 
-/* Card Styles */
 .card {
     flex: 1;
     height: 200px;
@@ -182,9 +181,30 @@ footer {
         opacity: 1;
     }
 }
-#foot{
-    border: 0.5rem solid white;
+#foot {
+    background-color: #000;
+    color: white;
+    padding: 0.5rem 3rem;
+    border-radius: 15px 15px 0 0; /* Rounded only at the top */
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    width: auto;
+    transition: all 0.4s ease-in-out;
 }
+#foot:hover{
+    
+        padding-bottom: 2.5em; /* Increases bottom padding */
+    
+
+}
+#foot a{
+    text-decoration: none;
+    color: #fff;
+}
+
 .custom-shape-divider-bottom-1743144532 {
     position: absolute;
     bottom: 0;
@@ -216,15 +236,27 @@ footer {
 }
 
 .getstrt{
-    padding: 0.5rem 1rem 0.5rem 1rem;
-    background-color: #000000;
-    color:#8d8d8d;
-    border:transparent;
-    margin-top: 2rem;
-    border-radius: 2rem;
-    font-family: 'JetBrains Mono', monospace;
+    margin-top: 5rem;
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #000;
+    background-color: #e6e6e6;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.356);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
 }
 .getstrt:hover{
-    border: 1px solid white;
-    color:white;
+    background-color: #000000;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.315);
+    color: #fff;
+    transform: translateY(-7px);
+}
+.getstrt:active{
+    transform: translateY(-1px);
 }
