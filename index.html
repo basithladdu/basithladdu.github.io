@@ -1,73 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Web Blinders – Internships & Training</title>
-  <link rel="stylesheet" href="style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Web Blinders Internships</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0e0c22;
+      color: #fff;
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, #7f00ff, #4a00e0);
+      padding: 4rem 1rem 3rem;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 700;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      color: #ddd;
+    }
+    .section {
+      padding: 3rem 1rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      color: #b388ff;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: #1a1736;
+      border-radius: 1rem;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      padding: 2rem;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+    }
+    .card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #c4a3ff;
+    }
+    .card p {
+      color: #ccc;
+    }
+    footer {
+      background: #1a1a2e;
+      color: #aaa;
+      padding: 2rem 1rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    footer a {
+      color: #c4a3ff;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="hero-content">
-      <h1>The Web Blinders</h1>
-      <p>Innovative Solutions. Digital Evolution.</p>
-      <a href="#programs" class="btn">Explore Internships</a>
-    </div>
-  </header>
-
-  <section class="section fade-in" id="programs">
+  <header>
+    <h1>The Web Blinders</h1>
+    <p>Innovative Solutions, Digital Evolution</p>
+  </header>  <section class="section">
     <h2>Internship & Training Programs</h2>
     <div class="cards">
       <div class="card">
         <h3>Web Development</h3>
-        <p>Master HTML, CSS, JavaScript, and front-end frameworks.</p>
+        <p>Learn HTML, CSS, JavaScript, and real-world frameworks to build modern websites.</p>
       </div>
       <div class="card">
         <h3>Data Science & AI</h3>
-        <p>Learn Python, ML, and real-world analytics projects.</p>
+        <p>Explore Python, machine learning, and hands-on data analysis projects.</p>
       </div>
       <div class="card">
         <h3>App Development</h3>
-        <p>Build and deploy mobile apps with UI/UX design principles.</p>
-      </div>
-      <div class="card">
-        <h3>Custom Programs</h3>
-        <p>Tailored internships for colleges, startups, or teams.</p>
+        <p>Build mobile apps, design UI/UX, and deploy on Android platforms.</p>
       </div>
     </div>
-  </section>
-
-  <section class="section fade-in">
-    <h2>Highlights</h2>
-    <div class="gallery">
-      <img src="https://via.placeholder.com/300x200?text=Internship+1" alt="Internship photo 1">
-      <img src="https://via.placeholder.com/300x200?text=Internship+2" alt="Internship photo 2">
-      <img src="https://via.placeholder.com/300x200?text=Internship+3" alt="Internship photo 3">
-    </div>
-  </section>
-
-  <section class="section fade-in contact">
-    <h2>Contact Us</h2>
-    <p>Have questions or want to enroll?</p>
-    <p class="phone">Call or WhatsApp: <strong>+91 95533 21211</strong></p>
-    <a href="tel:+919553321211" class="btn">Call Now</a>
-  </section>
-
-  <footer>
-    <p>&copy; 2025 The Web Blinders. All rights reserved.</p>
+  </section>  <footer>
+    <p>Contact us: 9014975206 / 9553321211</p>
+    <p>Email: <a href="mailto:contact@thewebblinders.in">contact@thewebblinders.in</a></p>
+    <p>Instagram: <a href="https://instagram.com/thewebblinders">@thewebblinders</a></p>
+    <p>GSTIN: 37ABGPU5700N1Z6</p>
+    <p>&copy; 2024 The Web Blinders. All rights reserved.</p>
   </footer>
-
-  <script>
-    const faders = document.querySelectorAll('.fade-in');
-    const appearOnScroll = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('appear');
-        }
-      });
-    }, { threshold: 0.1 });
-    faders.forEach(fader => appearOnScroll.observe(fader));
-  </script>
 </body>
 </html>
