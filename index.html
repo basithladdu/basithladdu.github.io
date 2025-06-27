@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dowry Demand Calculator</title>
+  <title>💍 Dowry Demand Calculator</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>💰 Dowry Demand Calculator</h1>
+    <h1>💍 Dowry Demand Calculator</h1>
 
     <form id="dowryForm">
-      <label>Groom's Income (₹):</label>
-      <input type="number" name="income" required>
+      <input type="text" name="name" placeholder="Groom's Name (Optional)">
 
-      <label>Groom's Education:</label>
+      <input type="number" name="income" placeholder="Groom's Income (₹)" required>
+
+      <label>Education:</label>
       <select name="education">
         <option value="0">Secondary</option>
         <option value="1">Bachelor's</option>
@@ -23,8 +24,7 @@
         <option value="4">IIT/NIT</option>
       </select>
 
-      <label>Groom's Looks (1 to 10):</label>
-      <input type="number" name="looks" min="1" max="10" required>
+      <input type="number" name="looks" min="1" max="10" placeholder="Looks (1 to 10)" required>
 
       <label>Region:</label>
       <select name="region">
@@ -42,6 +42,10 @@
     </form>
 
     <div id="result"></div>
+
+    <div id="disclaimer">
+      ⚠️ This is satire. Dowry is illegal. Don't be a criminal.
+    </div>
   </div>
 
   <script src="script.js"></script>
