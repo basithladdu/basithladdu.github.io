@@ -2,126 +2,131 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>chaotic love simulator 5.0 🌸🥭💥</title>
+  <title>chaotic love simulator 5.1 💥🌸🥭</title>
   <style>
-    body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      font-family: 'Comic Sans MS', cursive;
-      background: radial-gradient(circle, #ffe3f1, #d0f4de);
-      touch-action: none;
-    }
-    #wrapper {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
-    .photo {
-      position: absolute;
-      width: 140px;
-      border-radius: 50%;
-      border: 4px dashed #ff69b4;
-      box-shadow: 0 0 25px rgba(0,0,0,0.6);
-      cursor: grab;
-      user-select: none;
-      transition: transform 0.02s ease;
-    }
-    .photo:hover {
-      transform: scale(1.1) rotate(2deg);
-    }
-    .label {
-      text-align: center;
-      margin-top: 4px;
-      font-size: 0.9rem;
-      color: #222;
-      background: rgba(255,255,255,0.95);
-      border-radius: 8px;
-      padding: 3px 6px;
-      display: inline-block;
-    }
-    .boom {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      font-size: 6rem;
-      opacity: 0;
-      transition: all 0.05s ease;
-    }
-    .boom.active {
-      transform: translate(-50%, -50%) scale(3);
-      opacity: 1;
-      animation: explode 0.5s ease;
-    }
-    @keyframes explode {
-      0% { transform: scale(0.5); opacity: 0.2; }
-      100% { transform: scale(3); opacity: 1; }
-    }
-    .counter, .sneeze {
-      position: absolute;
-      bottom: 10px;
-      font-size: 1rem;
-      background: #fff9c4;
-      padding: 0.5rem 1rem;
-      border-radius: 16px;
-      box-shadow: 0 0 8px #999;
-    }
-    .counter {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .sneeze {
-      left: 10px;
-    }
-    .drop {
-      position: absolute;
-      width: 40px;
-      animation: dropAnim 3s ease-in forwards;
-    }
-    @keyframes dropAnim {
-      0% { top: -40px; opacity: 1; transform: rotate(0deg) scale(0.7); }
-      100% { top: 100vh; opacity: 0; transform: rotate(360deg) scale(1.5); }
-    }
-    #funBtn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #ffb6c1;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      box-shadow: 0 0 6px #999;
-    }
-    #question {
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-      background: white;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px #ff69b4;
-      font-size: 1.2rem;
-      z-index: 10;
-    }
-    #yes, #no {
-      margin: 10px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-    }
-    #yes { background: lightgreen; }
-    #no { background: pink; position: relative; }
+    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Fredoka', sans-serif;
+  background: radial-gradient(circle, #ffe3f1, #d0f4de);
+  touch-action: none;
+}
+#wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.photo {
+  position: absolute;
+  width: 140px;
+  border-radius: 50%;
+  border: 4px dashed #ff69b4;
+  box-shadow: 0 0 25px rgba(0,0,0,0.6);
+  cursor: grab;
+  user-select: none;
+  transition: transform 0.02s ease;
+}
+.photo:hover {
+  transform: scale(1.1) rotate(2deg);
+}
+.label {
+  text-align: center;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: #222;
+  background: rgba(255,255,255,0.95);
+  border-radius: 8px;
+  padding: 3px 6px;
+  display: inline-block;
+}
+.boom {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 6rem;
+  opacity: 0;
+  transition: all 0.05s ease;
+}
+.boom.active {
+  transform: translate(-50%, -50%) scale(3);
+  opacity: 1;
+  animation: explode 0.5s ease;
+}
+@keyframes explode {
+  0% { transform: scale(0.5); opacity: 0.2; }
+  100% { transform: scale(3); opacity: 1; }
+}
+.counter, .sneeze, .confetti-message {
+  position: absolute;
+  bottom: 10px;
+  font-size: 1rem;
+  background: #fff9c4;
+  padding: 0.5rem 1rem;
+  border-radius: 16px;
+  box-shadow: 0 0 8px #999;
+}
+.counter {
+  left: 50%;
+  transform: translateX(-50%);
+}
+.sneeze {
+  left: 10px;
+}
+.confetti-message {
+  right: 10px;
+  background: #ffe0f0;
+  display: none;
+}
+.drop {
+  position: absolute;
+  width: 40px;
+  animation: dropAnim 3s ease-in forwards;
+}
+@keyframes dropAnim {
+  0% { top: -40px; opacity: 1; transform: rotate(0deg) scale(0.7); }
+  100% { top: 100vh; opacity: 0; transform: rotate(360deg) scale(1.5); }
+}
+#question {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #ff69b4;
+  font-size: 1.2rem;
+  z-index: 10;
+}
+#yes, #no {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+#yes { background: lightgreen; }
+#no { background: pink; position: relative; }
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #ff69b4;
+  border-radius: 50%;
+  animation: fallConfetti 2s linear forwards;
+}
+@keyframes fallConfetti {
+  0% { top: -20px; opacity: 1; transform: scale(1); }
+  100% { top: 100vh; opacity: 0; transform: scale(1.5) rotate(720deg); }
+}
+
   </style>
 </head>
 <body>
-  <button id="funBtn">🎉 Surprise!</button>
   <div id="wrapper">
     <div id="question">
       Wanna go on another chaotic call tonight? 📞✨<br>
@@ -129,16 +134,17 @@
       <button id="no">NO</button>
     </div>
     <div class="photo" id="photo1" style="top:80px; left:80px;">
-      <img src="https://placekitten.com/160/160" alt="you" width="140">
+      <img src="basith.jpg" alt="you" width="140">
       <div class="label">me: dragging her heart, not just her photo 💘</div>
     </div>
     <div class="photo" id="photo2" style="top:280px; left:320px;">
-      <img src="https://placebear.com/160/160" alt="her" width="140">
+      <img src="zuha1.jpg" alt="her" width="140">
       <div class="label">her: said yes once, now stuck forever 🫠</div>
     </div>
     <div class="boom" id="boom">💥</div>
     <div class="counter" id="counter">Crashes: 0</div>
     <div class="sneeze" id="sneeze">Sneeze Sync: ❌</div>
+    <div class="confetti-message" id="confettiMsg">💖 She said YES! Confetti of chaos unlocked 🌈</div>
   </div>
   <script>
     const photo1 = document.getElementById('photo1');
@@ -147,9 +153,9 @@
     const counter = document.getElementById('counter');
     const sneeze = document.getElementById('sneeze');
     const wrapper = document.getElementById('wrapper');
-    const funBtn = document.getElementById('funBtn');
     const yesBtn = document.getElementById('yes');
     const noBtn = document.getElementById('no');
+    const confettiMsg = document.getElementById('confettiMsg');
     let crashes = 0;function makeDraggable(el) {
   let offsetX, offsetY;
   el.addEventListener('touchstart', (e) => {
@@ -190,6 +196,17 @@ function dropImage(emoji, x) {
   setTimeout(() => wrapper.removeChild(el), 3000);
 }
 
+function dropConfetti() {
+  for (let i = 0; i < 60; i++) {
+    const conf = document.createElement('div');
+    conf.className = 'confetti';
+    conf.style.left = Math.random() * window.innerWidth + 'px';
+    conf.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
+    wrapper.appendChild(conf);
+    setTimeout(() => wrapper.removeChild(conf), 2000);
+  }
+}
+
 function checkCollision() {
   const r1 = photo1.getBoundingClientRect();
   const r2 = photo2.getBoundingClientRect();
@@ -206,17 +223,9 @@ function checkCollision() {
   }
 }
 
-funBtn.onclick = () => {
-  const msgs = ['you up for chaos?', 'you sneeze I crash?', 'flowerbomb vibes 🌸', 'crash test #date'];
-  alert(msgs[Math.floor(Math.random()*msgs.length)]);
-};
-
 yesBtn.onclick = () => {
-  alert('YAY! Prepare for explosive vibes 💥💘');
-  for (let i = 0; i < 10; i++) {
-    setTimeout(() => dropImage('🌷', Math.random() * window.innerWidth), i * 150);
-    setTimeout(() => dropImage('💖', Math.random() * window.innerWidth), i * 200);
-  }
+  confettiMsg.style.display = 'block';
+  dropConfetti();
 };
 
 noBtn.onmouseover = () => {
