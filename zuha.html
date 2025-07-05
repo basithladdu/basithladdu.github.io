@@ -102,7 +102,7 @@
   z-index: 10;
   max-width: 90vw;
 }
-#yes, #no {
+#yes, #no, #sneezeBtn {
   margin: 10px;
   padding: 10px 20px;
   border: none;
@@ -112,6 +112,7 @@
 }
 #yes { background: lightgreen; }
 #no { background: pink; position: relative; }
+#sneezeBtn { background: #ffc8dd; position: fixed; top: 60%; left: 50%; transform: translateX(-50%); z-index: 20; }
 .confetti {
   position: absolute;
   width: 15px;
@@ -134,19 +135,21 @@
       <br>
       <button id="yes">YES</button>
       <button id="no">NO</button>
-    </div>
-    <div class="photo" id="photo1" style="top:80px; left:80px;">
-      <img src="basith.jpg" alt="you" width="140">
-      <div class="label">me: dragging her heart, not just her photo 💘</div>
-    </div>
-    <div class="photo" id="photo2" style="top:280px; left:320px;">
-      <img src="zuha1.jpg" alt="her" width="140">
-      <div class="label">her: said yes once, now stuck forever 🫠</div>
-    </div>
-    <div class="boom" id="boom">💥</div>
-    <div class="counter" id="counter">Crashes: 0</div>
-    <div class="sneeze" id="sneeze">Sneeze Sync: ❌</div>
-    <div class="confetti-message" id="confettiMsg">💖 She said YES! Confetti of chaos unlocked 🌈</div>
+    </div><button id="sneezeBtn">💥 we sneezed together: ACHOO</button>
+
+<div class="photo" id="photo1" style="top:80px; left:80px;">
+  <img src="basith.jpg" alt="you" width="140">
+  <div class="label">me: *sneezes loudly* wait did you just—</div>
+</div>
+<div class="photo" id="photo2" style="top:280px; left:320px;">
+  <img src="zuha1.jpg" alt="her" width="140">
+  <div class="label">her: *blushes* omg did we just sync sneeze?!</div>
+</div>
+<div class="boom" id="boom">💥</div>
+<div class="counter" id="counter">Crashes: 0</div>
+<div class="sneeze" id="sneeze">Sneeze Sync: ❌</div>
+<div class="confetti-message" id="confettiMsg">💖 She said YES! Confetti of chaos unlocked 🌈</div>
+
   </div>
   <script>
     const photo1 = document.getElementById('photo1');
@@ -157,6 +160,7 @@
     const wrapper = document.getElementById('wrapper');
     const yesBtn = document.getElementById('yes');
     const noBtn = document.getElementById('no');
+    const sneezeBtn = document.getElementById('sneezeBtn');
     const confettiMsg = document.getElementById('confettiMsg');
     let crashes = 0;function makeDraggable(el) {
   let offsetX, offsetY;
@@ -236,6 +240,12 @@ yesBtn.onclick = () => {
   const cx = qRect.left + qRect.width / 2;
   const cy = qRect.top + qRect.height / 2;
   dropConfettiExplosive(cx, cy);
+};
+
+sneezeBtn.onclick = () => {
+  sneeze.textContent = 'Sneeze Sync: 🥹💞 Certified sneeze twins';
+  dropImage('🤧', window.innerWidth / 2);
+  dropImage('🤧', window.innerWidth / 2 + 40);
 };
 
 noBtn.onmouseover = () => {
