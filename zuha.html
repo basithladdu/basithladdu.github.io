@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>chaotic love simulator 5.1 💥🌸🥭</title>
+  <title>zuha.exe 🌸</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');body {
   margin: 0;
@@ -86,11 +86,11 @@
 }
 @keyframes dropAnim {
   0% { top: -40px; opacity: 1; transform: rotate(0deg) scale(0.7); }
-  100% { top: 100vh; opacity: 0; transform: rotate(360deg) scale(1.5); }
+  100% { top: 100vh; opacity: 0; transform: rotate(720deg) scale(1.5); }
 }
 #question {
   position: absolute;
-  top: 20%;
+  top: 10%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
@@ -100,6 +100,7 @@
   box-shadow: 0 0 20px #ff69b4;
   font-size: 1.2rem;
   z-index: 10;
+  max-width: 90vw;
 }
 #yes, #no {
   margin: 10px;
@@ -113,15 +114,15 @@
 #no { background: pink; position: relative; }
 .confetti {
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 15px;
+  height: 15px;
   background: #ff69b4;
   border-radius: 50%;
-  animation: fallConfetti 2s linear forwards;
+  animation: explodeConfetti 2s ease-out forwards;
 }
-@keyframes fallConfetti {
-  0% { top: -20px; opacity: 1; transform: scale(1); }
-  100% { top: 100vh; opacity: 0; transform: scale(1.5) rotate(720deg); }
+@keyframes explodeConfetti {
+  0% { transform: translate(0, 0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
 }
 
   </style>
@@ -129,7 +130,8 @@
 <body>
   <div id="wrapper">
     <div id="question">
-      Wanna go on another chaotic call tonight? 📞✨<br>
+      Wanna call again tonight, Zuha? 💬
+      <br>
       <button id="yes">YES</button>
       <button id="no">NO</button>
     </div>
@@ -196,11 +198,16 @@ function dropImage(emoji, x) {
   setTimeout(() => wrapper.removeChild(el), 3000);
 }
 
-function dropConfetti() {
-  for (let i = 0; i < 60; i++) {
+function dropConfettiExplosive(centerX, centerY) {
+  for (let i = 0; i < 80; i++) {
     const conf = document.createElement('div');
     conf.className = 'confetti';
-    conf.style.left = Math.random() * window.innerWidth + 'px';
+    conf.style.left = centerX + 'px';
+    conf.style.top = centerY + 'px';
+    const dx = (Math.random() - 0.5) * window.innerWidth + 'px';
+    const dy = (Math.random() - 0.5) * window.innerHeight + 'px';
+    conf.style.setProperty('--dx', dx);
+    conf.style.setProperty('--dy', dy);
     conf.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
     wrapper.appendChild(conf);
     setTimeout(() => wrapper.removeChild(conf), 2000);
@@ -225,7 +232,10 @@ function checkCollision() {
 
 yesBtn.onclick = () => {
   confettiMsg.style.display = 'block';
-  dropConfetti();
+  const qRect = document.getElementById('question').getBoundingClientRect();
+  const cx = qRect.left + qRect.width / 2;
+  const cy = qRect.top + qRect.height / 2;
+  dropConfettiExplosive(cx, cy);
 };
 
 noBtn.onmouseover = () => {
