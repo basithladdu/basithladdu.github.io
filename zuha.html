@@ -2,7 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>chaotic love simulator 4.1 ⚡️🌸🥭</title>
+  <title>chaotic love simulator 5.0 🌸🥭💥</title>
   <style>
     body {
       margin: 0;
@@ -10,6 +10,7 @@
       overflow: hidden;
       font-family: 'Comic Sans MS', cursive;
       background: radial-gradient(circle, #ffe3f1, #d0f4de);
+      touch-action: none;
     }
     #wrapper {
       position: relative;
@@ -18,16 +19,16 @@
     }
     .photo {
       position: absolute;
-      width: 160px;
+      width: 140px;
       border-radius: 50%;
       border: 4px dashed #ff69b4;
       box-shadow: 0 0 25px rgba(0,0,0,0.6);
-      cursor: move;
+      cursor: grab;
       user-select: none;
       transition: transform 0.02s ease;
     }
     .photo:hover {
-      transform: scale(1.2) rotate(2deg);
+      transform: scale(1.1) rotate(2deg);
     }
     .label {
       text-align: center;
@@ -44,38 +45,42 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%) scale(0);
-      font-size: 5rem;
+      font-size: 6rem;
       opacity: 0;
       transition: all 0.05s ease;
     }
     .boom.active {
-      transform: translate(-50%, -50%) scale(2);
+      transform: translate(-50%, -50%) scale(3);
       opacity: 1;
-      animation: explode 0.3s ease;
+      animation: explode 0.5s ease;
     }
     @keyframes explode {
-      0% { transform: scale(0.3); opacity: 0.5; }
-      100% { transform: scale(2.5); opacity: 1; }
+      0% { transform: scale(0.5); opacity: 0.2; }
+      100% { transform: scale(3); opacity: 1; }
     }
-    .counter {
+    .counter, .sneeze {
       position: absolute;
-      bottom: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 1.1rem;
+      bottom: 10px;
+      font-size: 1rem;
       background: #fff9c4;
-      padding: 0.4rem 0.8rem;
+      padding: 0.5rem 1rem;
       border-radius: 16px;
       box-shadow: 0 0 8px #999;
+    }
+    .counter {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .sneeze {
+      left: 10px;
     }
     .drop {
       position: absolute;
       width: 40px;
-      animation: dropAnim 1s linear forwards;
+      animation: dropAnim 3s ease-in forwards;
     }
     @keyframes dropAnim {
       0% { top: -40px; opacity: 1; transform: rotate(0deg) scale(0.7); }
-      50% { opacity: 0.8; }
       100% { top: 100vh; opacity: 0; transform: rotate(360deg) scale(1.5); }
     }
     #funBtn {
@@ -90,30 +95,74 @@
       cursor: pointer;
       box-shadow: 0 0 6px #999;
     }
+    #question {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      background: white;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff69b4;
+      font-size: 1.2rem;
+      z-index: 10;
+    }
+    #yes, #no {
+      margin: 10px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #yes { background: lightgreen; }
+    #no { background: pink; position: relative; }
   </style>
 </head>
 <body>
   <button id="funBtn">🎉 Surprise!</button>
   <div id="wrapper">
+    <div id="question">
+      Wanna go on another chaotic call tonight? 📞✨<br>
+      <button id="yes">YES</button>
+      <button id="no">NO</button>
+    </div>
     <div class="photo" id="photo1" style="top:80px; left:80px;">
-      <img src="basith.jpg" alt="you" width="160">
-      <div class="label">me: I just met her and now I'm dragging her around 💀</div>
+      <img src="https://placekitten.com/160/160" alt="you" width="140">
+      <div class="label">me: dragging her heart, not just her photo 💘</div>
     </div>
     <div class="photo" id="photo2" style="top:280px; left:320px;">
-      <img src="zuha1.jpg" alt="her" width="160">
-      <div class="label">her: I sneezed and somehow this happened 🤧💘</div>
+      <img src="https://placebear.com/160/160" alt="her" width="140">
+      <div class="label">her: said yes once, now stuck forever 🫠</div>
     </div>
     <div class="boom" id="boom">💥</div>
     <div class="counter" id="counter">Crashes: 0</div>
+    <div class="sneeze" id="sneeze">Sneeze Sync: ❌</div>
   </div>
   <script>
     const photo1 = document.getElementById('photo1');
     const photo2 = document.getElementById('photo2');
     const boom = document.getElementById('boom');
     const counter = document.getElementById('counter');
+    const sneeze = document.getElementById('sneeze');
     const wrapper = document.getElementById('wrapper');
     const funBtn = document.getElementById('funBtn');
+    const yesBtn = document.getElementById('yes');
+    const noBtn = document.getElementById('no');
     let crashes = 0;function makeDraggable(el) {
+  let offsetX, offsetY;
+  el.addEventListener('touchstart', (e) => {
+    const rect = el.getBoundingClientRect();
+    offsetX = e.touches[0].clientX - rect.left;
+    offsetY = e.touches[0].clientY - rect.top;
+  });
+  el.addEventListener('touchmove', (e) => {
+    const touch = e.touches[0];
+    el.style.left = (touch.clientX - offsetX) + 'px';
+    el.style.top = (touch.clientY - offsetY) + 'px';
+    checkCollision();
+  });
   el.onmousedown = e => {
     const shiftX = e.clientX - el.getBoundingClientRect().left;
     const shiftY = e.clientY - el.getBoundingClientRect().top;
@@ -132,13 +181,13 @@
   el.ondragstart = () => false;
 }
 
-function dropImage(src, x) {
-  const img = document.createElement('img');
-  img.src = src;
-  img.className = 'drop';
-  img.style.left = x + 'px';
-  wrapper.appendChild(img);
-  setTimeout(() => wrapper.removeChild(img), 1000);
+function dropImage(emoji, x) {
+  const el = document.createElement('div');
+  el.innerText = emoji;
+  el.className = 'drop';
+  el.style.left = x + 'px';
+  wrapper.appendChild(el);
+  setTimeout(() => wrapper.removeChild(el), 3000);
 }
 
 function checkCollision() {
@@ -148,16 +197,32 @@ function checkCollision() {
     boom.classList.add('active');
     crashes++;
     counter.textContent = `Crashes: ${crashes}`;
+    sneeze.textContent = 'Sneeze Sync: ✅';
     const midX = (r1.left + r2.left) / 2;
-    dropImage('mango.jpg', midX);
-    dropImage('rose.jpg', midX + 20);
-    setTimeout(() => boom.classList.remove('active'), 300);
+    dropImage('🥭', midX);
+    dropImage('🌹', midX + 20);
+    dropImage('🌸', midX - 20);
+    setTimeout(() => boom.classList.remove('active'), 500);
   }
 }
 
 funBtn.onclick = () => {
-  const msgs = ['hi 😊','you rock 🚀','mango vibes 🍑','rose vibes 🌹','talk soon? 📞'];
+  const msgs = ['you up for chaos?', 'you sneeze I crash?', 'flowerbomb vibes 🌸', 'crash test #date'];
   alert(msgs[Math.floor(Math.random()*msgs.length)]);
+};
+
+yesBtn.onclick = () => {
+  alert('YAY! Prepare for explosive vibes 💥💘');
+  for (let i = 0; i < 10; i++) {
+    setTimeout(() => dropImage('🌷', Math.random() * window.innerWidth), i * 150);
+    setTimeout(() => dropImage('💖', Math.random() * window.innerWidth), i * 200);
+  }
+};
+
+noBtn.onmouseover = () => {
+  noBtn.style.position = 'absolute';
+  noBtn.style.top = Math.random() * 70 + '%';
+  noBtn.style.left = Math.random() * 70 + '%';
 };
 
 makeDraggable(photo1);
