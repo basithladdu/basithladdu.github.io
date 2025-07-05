@@ -1,0 +1,168 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>chaotic love simulator 4.1 ⚡️🌸🥭</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: 'Comic Sans MS', cursive;
+      background: radial-gradient(circle, #ffe3f1, #d0f4de);
+    }
+    #wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+    .photo {
+      position: absolute;
+      width: 160px;
+      border-radius: 50%;
+      border: 4px dashed #ff69b4;
+      box-shadow: 0 0 25px rgba(0,0,0,0.6);
+      cursor: move;
+      user-select: none;
+      transition: transform 0.02s ease;
+    }
+    .photo:hover {
+      transform: scale(1.2) rotate(2deg);
+    }
+    .label {
+      text-align: center;
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: #222;
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px;
+      padding: 3px 6px;
+      display: inline-block;
+    }
+    .boom {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      font-size: 5rem;
+      opacity: 0;
+      transition: all 0.05s ease;
+    }
+    .boom.active {
+      transform: translate(-50%, -50%) scale(2);
+      opacity: 1;
+      animation: explode 0.3s ease;
+    }
+    @keyframes explode {
+      0% { transform: scale(0.3); opacity: 0.5; }
+      100% { transform: scale(2.5); opacity: 1; }
+    }
+    .counter {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.1rem;
+      background: #fff9c4;
+      padding: 0.4rem 0.8rem;
+      border-radius: 16px;
+      box-shadow: 0 0 8px #999;
+    }
+    .drop {
+      position: absolute;
+      width: 40px;
+      animation: dropAnim 1s linear forwards;
+    }
+    @keyframes dropAnim {
+      0% { top: -40px; opacity: 1; transform: rotate(0deg) scale(0.7); }
+      50% { opacity: 0.8; }
+      100% { top: 100vh; opacity: 0; transform: rotate(360deg) scale(1.5); }
+    }
+    #funBtn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: #ffb6c1;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      box-shadow: 0 0 6px #999;
+    }
+  </style>
+</head>
+<body>
+  <button id="funBtn">🎉 Surprise!</button>
+  <div id="wrapper">
+    <div class="photo" id="photo1" style="top:80px; left:80px;">
+      <img src="basith.jpg" alt="you" width="160">
+      <div class="label">me: I just met her and now I'm dragging her around 💀</div>
+    </div>
+    <div class="photo" id="photo2" style="top:280px; left:320px;">
+      <img src="zuha1.jpg" alt="her" width="160">
+      <div class="label">her: I sneezed and somehow this happened 🤧💘</div>
+    </div>
+    <div class="boom" id="boom">💥</div>
+    <div class="counter" id="counter">Crashes: 0</div>
+  </div>
+  <script>
+    const photo1 = document.getElementById('photo1');
+    const photo2 = document.getElementById('photo2');
+    const boom = document.getElementById('boom');
+    const counter = document.getElementById('counter');
+    const wrapper = document.getElementById('wrapper');
+    const funBtn = document.getElementById('funBtn');
+    let crashes = 0;function makeDraggable(el) {
+  el.onmousedown = e => {
+    const shiftX = e.clientX - el.getBoundingClientRect().left;
+    const shiftY = e.clientY - el.getBoundingClientRect().top;
+    const moveAt = (pageX, pageY) => {
+      el.style.left = pageX - shiftX + 'px';
+      el.style.top = pageY - shiftY + 'px';
+      checkCollision();
+    };
+    const onMouseMove = event => moveAt(event.pageX, event.pageY);
+    document.addEventListener('mousemove', onMouseMove);
+    el.onmouseup = () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      el.onmouseup = null;
+    };
+  };
+  el.ondragstart = () => false;
+}
+
+function dropImage(src, x) {
+  const img = document.createElement('img');
+  img.src = src;
+  img.className = 'drop';
+  img.style.left = x + 'px';
+  wrapper.appendChild(img);
+  setTimeout(() => wrapper.removeChild(img), 1000);
+}
+
+function checkCollision() {
+  const r1 = photo1.getBoundingClientRect();
+  const r2 = photo2.getBoundingClientRect();
+  if (r1.left < r2.right && r1.right > r2.left && r1.top < r2.bottom && r1.bottom > r2.top) {
+    boom.classList.add('active');
+    crashes++;
+    counter.textContent = `Crashes: ${crashes}`;
+    const midX = (r1.left + r2.left) / 2;
+    dropImage('mango.jpg', midX);
+    dropImage('rose.jpg', midX + 20);
+    setTimeout(() => boom.classList.remove('active'), 300);
+  }
+}
+
+funBtn.onclick = () => {
+  const msgs = ['hi 😊','you rock 🚀','mango vibes 🍑','rose vibes 🌹','talk soon? 📞'];
+  alert(msgs[Math.floor(Math.random()*msgs.length)]);
+};
+
+makeDraggable(photo1);
+makeDraggable(photo2);
+
+  </script>
+</body>
+</html>
