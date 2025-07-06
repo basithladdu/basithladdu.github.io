@@ -1,262 +1,596 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>zuha.exe 🌸</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap');body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: 'Fredoka', sans-serif;
-  background: radial-gradient(circle, #ffe3f1, #d0f4de);
-  touch-action: none;
-}
-#wrapper {
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-}
-.photo {
-  position: absolute;
-  width: 140px;
-  border-radius: 50%;
-  border: 4px dashed #ff69b4;
-  box-shadow: 0 0 25px rgba(0,0,0,0.6);
-  cursor: grab;
-  user-select: none;
-  transition: transform 0.02s ease;
-}
-.photo:hover {
-  transform: scale(1.1) rotate(2deg);
-}
-.label {
-  text-align: center;
-  margin-top: 4px;
-  font-size: 0.9rem;
-  color: #222;
-  background: rgba(255,255,255,0.95);
-  border-radius: 8px;
-  padding: 3px 6px;
-  display: inline-block;
-}
-.boom {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  font-size: 6rem;
-  opacity: 0;
-  transition: all 0.05s ease;
-}
-.boom.active {
-  transform: translate(-50%, -50%) scale(3);
-  opacity: 1;
-  animation: explode 0.5s ease;
-}
-@keyframes explode {
-  0% { transform: scale(0.5); opacity: 0.2; }
-  100% { transform: scale(3); opacity: 1; }
-}
-.counter, .sneeze, .confetti-message {
-  position: absolute;
-  bottom: 10px;
-  font-size: 1rem;
-  background: #fff9c4;
-  padding: 0.5rem 1rem;
-  border-radius: 16px;
-  box-shadow: 0 0 8px #999;
-}
-.counter {
-  left: 50%;
-  transform: translateX(-50%);
-}
-.sneeze {
-  left: 10px;
-}
-.confetti-message {
-  right: 10px;
-  background: #ffe0f0;
-  display: none;
-}
-.drop {
-  position: absolute;
-  width: 40px;
-  animation: dropAnim 3s ease-in forwards;
-}
-@keyframes dropAnim {
-  0% { top: -40px; opacity: 1; transform: rotate(0deg) scale(0.7); }
-  100% { top: 100vh; opacity: 0; transform: rotate(720deg) scale(1.5); }
-}
-#question {
-  position: absolute;
-  top: 10%;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  background: white;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 0 20px #ff69b4;
-  font-size: 1.2rem;
-  z-index: 10;
-  max-width: 90vw;
-}
-#yes, #no, #sneezeBtn {
-  margin: 10px;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-#yes { background: lightgreen; }
-#no { background: pink; position: relative; }
-#sneezeBtn { background: #ffc8dd; position: fixed; top: 60%; left: 50%; transform: translateX(-50%); z-index: 20; }
-.confetti {
-  position: absolute;
-  width: 15px;
-  height: 15px;
-  background: #ff69b4;
-  border-radius: 50%;
-  animation: explodeConfetti 2s ease-out forwards;
-}
-@keyframes explodeConfetti {
-  0% { transform: translate(0, 0) scale(1); opacity: 1; }
-  100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌸 Zuha's Special Page 🌸</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pink-light: #ffe3f1;
+            --green-light: #d0f4de;
+            --hot-pink: #ff69b4;
+            --text-dark: #222;
+            --bubble-bg: rgba(255, 255, 255, 0.95);
+            --bubble-shadow: rgba(0, 0, 0, 0.3);
+            --transition-speed: 0.3s;
+            --bounce-amplitude: 15px; /* For hover bounce */
+        }
 
-  </style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Fredoka', sans-serif;
+            background: radial-gradient(circle, var(--pink-light), var(--green-light));
+            touch-action: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        #wrapper {
+            position: absolute;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .photo-container {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            user-select: none;
+            cursor: grab;
+            touch-action: none; /* Prevent browser touch actions */
+            will-change: transform; /* Optimize for animation */
+        }
+
+        .photo {
+            width: 140px;
+            height: 140px; /* Ensure aspect ratio */
+            border-radius: 50%;
+            border: 4px dashed var(--hot-pink);
+            box-shadow: 0 0 25px var(--bubble-shadow);
+            object-fit: cover; /* Ensure image covers the circle */
+            pointer-events: none; /* Let the container handle dragging */
+        }
+
+        .photo-label {
+            text-align: center;
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            background: var(--bubble-bg);
+            border-radius: 12px;
+            padding: 5px 10px;
+            display: inline-block;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            max-width: 180px; /* Limit label width */
+            word-wrap: break-word;
+        }
+
+        .boom {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 6rem;
+            opacity: 0;
+            transition: all 0.1s ease-out;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .boom.active {
+            transform: translate(-50%, -50%) scale(2);
+            opacity: 1;
+            animation: explode 0.4s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0.2; }
+            100% { transform: translate(-50%, -50%) scale(2); opacity: 1; }
+        }
+
+        .info-box {
+            position: absolute;
+            font-size: 1rem;
+            background: #fff9c4;
+            padding: 0.6rem 1.2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+            white-space: nowrap;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .counter {
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .sneeze-status {
+            bottom: 20px;
+            left: 20px;
+            background: #e0f7fa; /* Different color for sneeze status */
+        }
+
+        .confetti-message {
+            bottom: 20px;
+            right: 20px;
+            background: #ffe0f0;
+            display: none;
+        }
+
+        .drop-emoji {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            transform: translateY(-50px) rotate(0deg) scale(0.5);
+            animation: dropAnim 3s ease-in forwards;
+            pointer-events: none;
+        }
+
+        @keyframes dropAnim {
+            0% { top: -50px; opacity: 0; transform: translateY(-50px) rotate(0deg) scale(0.5); }
+            20% { opacity: 1; transform: translateY(0) rotate(90deg) scale(1); }
+            100% { top: 100vh; opacity: 0; transform: translateY(calc(100vh + 50px)) rotate(720deg) scale(1.5); }
+        }
+
+        #question-modal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px var(--hot-pink);
+            font-size: 1.3rem;
+            text-align: center;
+            z-index: 100; /* Ensure it's on top */
+            max-width: 90vw;
+            box-sizing: border-box;
+            transition: all var(--transition-speed) ease-in-out;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #question-modal button {
+            margin: 10px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        #question-modal button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        #yes-btn {
+            background: #90ee90; /* Light green */
+            color: var(--text-dark);
+        }
+
+        #yes-btn:hover {
+            background: #76d276;
+        }
+
+        #no-btn {
+            background: #ffb6c1; /* Light pink */
+            color: var(--text-dark);
+            position: relative; /* For "No" button escape */
+        }
+
+        #no-btn:hover {
+            background: #ff9fb1;
+        }
+
+        #sneeze-button {
+            background: #ffc8dd;
+            position: fixed;
+            top: 75%; /* Adjusted position */
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            padding: 15px 30px;
+            border-radius: 20px;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            white-space: nowrap;
+        }
+
+        #sneeze-button:hover {
+            background: #ffaad0;
+        }
+
+        .confetti-piece {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: hsl(var(--hue), 70%, 60%);
+            border-radius: 50%;
+            animation: explodeConfetti 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes explodeConfetti {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--dx), var(--dy)) scale(0.2); opacity: 0; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .photo {
+                width: 100px;
+                height: 100px;
+            }
+            .photo-label {
+                font-size: 0.8rem;
+                padding: 3px 8px;
+            }
+            .boom {
+                font-size: 4rem;
+            }
+            .info-box {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+            #question-modal {
+                padding: 20px;
+                font-size: 1.1rem;
+            }
+            #question-modal button {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            #sneeze-button {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div id="wrapper">
-    <div id="question">
-      Wanna call again tonight, Zuha? 💬
-      <br>
-      <button id="yes">YES</button>
-      <button id="no">NO</button>
-    </div><button id="sneezeBtn">💥 we sneezed together: ACHOO</button>
+    <div id="wrapper">
+        <div id="question-modal">
+            Wanna call again tonight, Zuha? 💬
+            <div>
+                <button id="yes-btn">YES</button>
+                <button id="no-btn">NO</button>
+            </div>
+        </div>
 
-<div class="photo" id="photo1" style="top:80px; left:80px;">
-  <img src="basith.jpg" alt="you" width="140">
-  <div class="label">me: *sneezes* wait did you just—</div>
-</div>
-<div class="photo" id="photo2" style="top:280px; left:320px;">
-  <img src="zuha1.jpg" alt="her" width="140">
-  <div class="label">her: omg did we just sneeze at the same time?!</div>
-</div>
-<div class="boom" id="boom">💥</div>
-<div class="counter" id="counter">Crashes: 0</div>
-<div class="sneeze" id="sneeze">Sneeze Sync: ❌</div>
-<div class="confetti-message" id="confettiMsg">💖 YAY 💗</div>
+        <button id="sneeze-button">💥 we sneezed together: ACHOO</button>
 
-  </div>
-  <script>
-    const photo1 = document.getElementById('photo1');
-    const photo2 = document.getElementById('photo2');
-    const boom = document.getElementById('boom');
-    const counter = document.getElementById('counter');
-    const sneeze = document.getElementById('sneeze');
-    const wrapper = document.getElementById('wrapper');
-    const yesBtn = document.getElementById('yes');
-    const noBtn = document.getElementById('no');
-    const sneezeBtn = document.getElementById('sneezeBtn');
-    const confettiMsg = document.getElementById('confettiMsg');
-    let crashes = 0;function makeDraggable(el) {
-  let offsetX, offsetY;
-  el.addEventListener('touchstart', (e) => {
-    const rect = el.getBoundingClientRect();
-    offsetX = e.touches[0].clientX - rect.left;
-    offsetY = e.touches[0].clientY - rect.top;
-  });
-  el.addEventListener('touchmove', (e) => {
-    const touch = e.touches[0];
-    el.style.left = (touch.clientX - offsetX) + 'px';
-    el.style.top = (touch.clientY - offsetY) + 'px';
-    checkCollision();
-  });
-  el.onmousedown = e => {
-    const shiftX = e.clientX - el.getBoundingClientRect().left;
-    const shiftY = e.clientY - el.getBoundingClientRect().top;
-    const moveAt = (pageX, pageY) => {
-      el.style.left = pageX - shiftX + 'px';
-      el.style.top = pageY - shiftY + 'px';
-      checkCollision();
-    };
-    const onMouseMove = event => moveAt(event.pageX, event.pageY);
-    document.addEventListener('mousemove', onMouseMove);
-    el.onmouseup = () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      el.onmouseup = null;
-    };
-  };
-  el.ondragstart = () => false;
-}
+        <div class="photo-container" id="photo1" style="left: 10%; top: 20%;">
+            <img src="basith.jpg" alt="You" class="photo">
+            <div class="photo-label">me: *sneezes* wait did you just—</div>
+        </div>
 
-function dropImage(emoji, x) {
-  const el = document.createElement('div');
-  el.innerText = emoji;
-  el.className = 'drop';
-  el.style.left = x + 'px';
-  wrapper.appendChild(el);
-  setTimeout(() => wrapper.removeChild(el), 3000);
-}
+        <div class="photo-container" id="photo2" style="left: 70%; top: 50%;">
+            <img src="zuha1.jpg" alt="Her" class="photo">
+            <div class="photo-label">her: omg did we just sneeze at the same time?!</div>
+        </div>
 
-function dropConfettiExplosive(centerX, centerY) {
-  for (let i = 0; i < 80; i++) {
-    const conf = document.createElement('div');
-    conf.className = 'confetti';
-    conf.style.left = centerX + 'px';
-    conf.style.top = centerY + 'px';
-    const dx = (Math.random() - 0.5) * window.innerWidth + 'px';
-    const dy = (Math.random() - 0.5) * window.innerHeight + 'px';
-    conf.style.setProperty('--dx', dx);
-    conf.style.setProperty('--dy', dy);
-    conf.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
-    wrapper.appendChild(conf);
-    setTimeout(() => wrapper.removeChild(conf), 2000);
-  }
-}
+        <div class="boom" id="boom-effect">💥</div>
 
-function checkCollision() {
-  const r1 = photo1.getBoundingClientRect();
-  const r2 = photo2.getBoundingClientRect();
-  if (r1.left < r2.right && r1.right > r2.left && r1.top < r2.bottom && r1.bottom > r2.top) {
-    boom.classList.add('active');
-    crashes++;
-    counter.textContent = `Crashes: ${crashes}`;
-    sneeze.textContent = 'Sneeze Sync: ✅';
-    const midX = (r1.left + r2.left) / 2;
-    dropImage('🥭', midX);
-    dropImage('🌹', midX + 20);
-    dropImage('🌸', midX - 20);
-    setTimeout(() => boom.classList.remove('active'), 500);
-  }
-}
+        <div class="info-box counter" id="crash-counter">Crashes: 0</div>
+        <div class="info-box sneeze-status" id="sneeze-status-display">Sneeze Sync: ❌</div>
+        <div class="info-box confetti-message" id="confetti-message">💖 YAY 💗</div>
+    </div>
 
-yesBtn.onclick = () => {
-  confettiMsg.style.display = 'block';
-  const qRect = document.getElementById('question').getBoundingClientRect();
-  const cx = qRect.left + qRect.width / 2;
-  const cy = qRect.top + qRect.height / 2;
-  dropConfettiExplosive(cx, cy);
-};
+    <script>
+        const wrapper = document.getElementById('wrapper');
+        const photo1Container = document.getElementById('photo1');
+        const photo2Container = document.getElementById('photo2');
+        const boomEffect = document.getElementById('boom-effect');
+        const crashCounter = document.getElementById('crash-counter');
+        const sneezeStatusDisplay = document.getElementById('sneeze-status-display');
+        const yesBtn = document.getElementById('yes-btn');
+        const noBtn = document.getElementById('no-btn');
+        const sneezeButton = document.getElementById('sneeze-button');
+        const confettiMessage = document.getElementById('confetti-message');
+        const questionModal = document.getElementById('question-modal');
 
-sneezeBtn.onclick = () => {
-  sneeze.textContent = 'Sneeze Sync: 🥹💞 Certified sneeze twins';
-  dropImage('🤧', window.innerWidth / 2);
-  dropImage('🤧', window.innerWidth / 2 + 40);
-};
+        let crashes = 0;
+        let photo1Pos = { x: window.innerWidth * 0.1, y: window.innerHeight * 0.2 };
+        let photo2Pos = { x: window.innerWidth * 0.7, y: window.innerHeight * 0.5 };
+        let photo1Vel = { x: 0, y: 0 };
+        let photo2Vel = { x: 0, y: 0 };
+        const dragForce = 0.95; // Damping for drag
+        const collisionForce = 0.05; // How strongly they repel after collision
+        const gravity = 0.0; // Can add subtle gravity if desired
+        const bounceFactor = -0.7; // How much bounce off walls
+        const photoSize = 140; // Diameter of the photos
 
-noBtn.onmouseover = () => {
-  noBtn.style.position = 'absolute';
-  noBtn.style.top = Math.random() * 70 + '%';
-  noBtn.style.left = Math.random() * 70 + '%';
-};
+        let isDragging1 = false;
+        let isDragging2 = false;
+        let activePhoto = null;
+        let dragOffsetX, dragOffsetY;
 
-makeDraggable(photo1);
-makeDraggable(photo2);
+        // --- Physics and Animation Loop ---
+        function updatePhysics() {
+            if (isDragging1) {
+                photo1Vel.x = 0;
+                photo1Vel.y = 0;
+            } else {
+                photo1Vel.x *= dragForce;
+                photo1Vel.y *= dragForce;
+                photo1Vel.y += gravity;
+                photo1Pos.x += photo1Vel.x;
+                photo1Pos.y += photo1Vel.y;
+                containPhoto(photo1Pos, photo1Vel);
+            }
 
-  </script>
+            if (isDragging2) {
+                photo2Vel.x = 0;
+                photo2Vel.y = 0;
+            } else {
+                photo2Vel.x *= dragForce;
+                photo2Vel.y *= dragForce;
+                photo2Vel.y += gravity;
+                photo2Pos.x += photo2Vel.x;
+                photo2Pos.y += photo2Vel.y;
+                containPhoto(photo2Pos, photo2Vel);
+            }
+
+            checkCollision();
+
+            photo1Container.style.transform = `translate(${photo1Pos.x}px, ${photo1Pos.y}px)`;
+            photo2Container.style.transform = `translate(${photo2Pos.x}px, ${photo2Pos.y}px)`;
+
+            requestAnimationFrame(updatePhysics);
+        }
+
+        function containPhoto(pos, vel) {
+            // Left wall
+            if (pos.x < 0) {
+                pos.x = 0;
+                vel.x *= bounceFactor;
+            }
+            // Right wall
+            if (pos.x + photoSize > window.innerWidth) {
+                pos.x = window.innerWidth - photoSize;
+                vel.x *= bounceFactor;
+            }
+            // Top wall
+            if (pos.y < 0) {
+                pos.y = 0;
+                vel.y *= bounceFactor;
+            }
+            // Bottom wall
+            if (pos.y + photoSize > window.innerHeight) {
+                pos.y = window.innerHeight - photoSize;
+                vel.y *= bounceFactor;
+            }
+        }
+
+        function checkCollision() {
+            const dx = (photo1Pos.x + photoSize / 2) - (photo2Pos.x + photoSize / 2);
+            const dy = (photo1Pos.y + photoSize / 2) - (photo2Pos.y + photoSize / 2);
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const minDistance = photoSize; // Sum of radii
+
+            if (distance < minDistance) {
+                // Collision detected
+                if (!boomEffect.classList.contains('active')) {
+                    boomEffect.classList.add('active');
+                    boomEffect.style.left = `${(photo1Pos.x + photo2Pos.x) / 2 + photoSize / 2}px`;
+                    boomEffect.style.top = `${(photo1Pos.y + photo2Pos.y) / 2 + photoSize / 2}px`;
+                    crashes++;
+                    crashCounter.textContent = `Crashes: ${crashes}`;
+                    sneezeStatusDisplay.textContent = 'Sneeze Sync: ✅';
+                    dropEmoji('🥭', (photo1Pos.x + photo2Pos.x) / 2 + photoSize / 2 - 20);
+                    dropEmoji('🌹', (photo1Pos.x + photo2Pos.x) / 2 + photoSize / 2 + 20);
+                    dropEmoji('🌸', (photo1Pos.x + photo2Pos.x) / 2 + photoSize / 2);
+                    setTimeout(() => boomEffect.classList.remove('active'), 500);
+                }
+
+                // Resolve collision (simple repulsion)
+                const angle = Math.atan2(dy, dx);
+                const overlap = minDistance - distance;
+
+                const resolveX = overlap * Math.cos(angle) * collisionForce;
+                const resolveY = overlap * Math.sin(angle) * collisionForce;
+
+                if (!isDragging1) {
+                    photo1Pos.x -= resolveX / 2;
+                    photo1Pos.y -= resolveY / 2;
+                    photo1Vel.x -= resolveX * 0.1; // Add a little kick
+                    photo1Vel.y -= resolveY * 0.1;
+                }
+                if (!isDragging2) {
+                    photo2Pos.x += resolveX / 2;
+                    photo2Pos.y += resolveY / 2;
+                    photo2Vel.x += resolveX * 0.1; // Add a little kick
+                    photo2Vel.y += resolveY * 0.1;
+                }
+            }
+        }
+
+        // --- Dragging functionality ---
+        function startDrag(e, photoEl) {
+            e.preventDefault();
+            activePhoto = photoEl;
+            const rect = photoEl.getBoundingClientRect();
+            if (e.type === 'touchstart') {
+                dragOffsetX = e.touches[0].clientX - rect.left;
+                dragOffsetY = e.touches[0].clientY - rect.top;
+            } else { // mouse
+                dragOffsetX = e.clientX - rect.left;
+                dragOffsetY = e.clientY - rect.top;
+            }
+
+            if (activePhoto === photo1Container) {
+                isDragging1 = true;
+            } else {
+                isDragging2 = true;
+            }
+
+            photoEl.style.cursor = 'grabbing';
+            photoEl.style.transition = 'none'; // Disable transition during drag
+        }
+
+        function doDrag(e) {
+            if (!activePhoto) return;
+
+            let clientX, clientY;
+            if (e.type === 'touchmove') {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else { // mouse
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            const newX = clientX - dragOffsetX;
+            const newY = clientY - dragOffsetY;
+
+            if (activePhoto === photo1Container) {
+                photo1Pos.x = newX;
+                photo1Pos.y = newY;
+            } else {
+                photo2Pos.x = newX;
+                photo2Pos.y = newY;
+            }
+        }
+
+        function endDrag() {
+            if (activePhoto) {
+                activePhoto.style.cursor = 'grab';
+                activePhoto.style.transition = 'transform 0.02s ease-out'; // Re-enable transition
+                activePhoto = null;
+                isDragging1 = false;
+                isDragging2 = false;
+            }
+        }
+
+        photo1Container.addEventListener('mousedown', (e) => startDrag(e, photo1Container));
+        photo1Container.addEventListener('touchstart', (e) => startDrag(e, photo1Container));
+
+        photo2Container.addEventListener('mousedown', (e) => startDrag(e, photo2Container));
+        photo2Container.addEventListener('touchstart', (e) => startDrag(e, photo2Container));
+
+        document.addEventListener('mousemove', doDrag);
+        document.addEventListener('touchmove', doDrag, { passive: false }); // Needs passive: false for e.preventDefault()
+        document.addEventListener('mouseup', endDrag);
+        document.addEventListener('touchend', endDrag);
+        document.addEventListener('touchcancel', endDrag);
+
+        // --- Utility Functions ---
+        function dropEmoji(emoji, x) {
+            const el = document.createElement('div');
+            el.innerText = emoji;
+            el.className = 'drop-emoji';
+            el.style.left = `${x}px`;
+            wrapper.appendChild(el);
+            setTimeout(() => wrapper.removeChild(el), 3000);
+        }
+
+        function createConfettiExplosion(centerX, centerY, count = 80) {
+            for (let i = 0; i < count; i++) {
+                const conf = document.createElement('div');
+                conf.className = 'confetti-piece';
+                conf.style.left = `${centerX}px`;
+                conf.style.top = `${centerY}px`;
+                conf.style.setProperty('--hue', Math.random() * 360); // Random color
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * 200 + 50; // Spread distance
+                const dx = distance * Math.cos(angle) + 'px';
+                const dy = distance * Math.sin(angle) + 'px';
+                conf.style.setProperty('--dx', dx);
+                conf.style.setProperty('--dy', dy);
+                wrapper.appendChild(conf);
+                setTimeout(() => wrapper.removeChild(conf), 1500);
+            }
+        }
+
+        // --- Event Listeners ---
+        yesBtn.onclick = () => {
+            confettiMessage.style.display = 'block';
+            questionModal.style.transform = 'translate(-50%, -50%) scale(0)';
+            questionModal.style.opacity = '0';
+            setTimeout(() => {
+                questionModal.style.display = 'none';
+            }, var(--transition-speed) * 1000); // Hide after animation
+
+            const qRect = questionModal.getBoundingClientRect();
+            const cx = qRect.left + qRect.width / 2;
+            const cy = qRect.top + qRect.height / 2;
+            createConfettiExplosion(cx, cy, 150);
+        };
+
+        sneezeButton.onclick = () => {
+            sneezeStatusDisplay.textContent = 'Sneeze Sync: 🥹💞 Certified sneeze twins';
+            dropEmoji('🤧', window.innerWidth / 2 - 30);
+            dropEmoji('🤧', window.innerWidth / 2 + 30);
+            createConfettiExplosion(window.innerWidth / 2, window.innerHeight * 0.75, 50);
+        };
+
+        // "No" button escape behavior
+        noBtn.addEventListener('mouseover', () => {
+            // Get current modal bounds
+            const modalRect = questionModal.getBoundingClientRect();
+            const buttonRect = noBtn.getBoundingClientRect();
+
+            let newX = Math.random() * (window.innerWidth - buttonRect.width);
+            let newY = Math.random() * (window.innerHeight - buttonRect.height);
+
+            // Ensure the button stays within the modal bounds if possible,
+            // otherwise move it anywhere on the screen
+            const modalPadding = 20; // account for padding
+            const newLeftInModal = newX - modalRect.left;
+            const newTopInModal = newY - modalRect.top;
+
+            if (newLeftInModal < modalPadding || newLeftInModal + buttonRect.width > modalRect.width - modalPadding ||
+                newTopInModal < modalPadding || newTopInModal + buttonRect.height > modalRect.height - modalPadding) {
+                // If it goes outside modal, make it jump anywhere on screen
+                 newX = Math.random() * (window.innerWidth - buttonRect.width);
+                 newY = Math.random() * (window.innerHeight - buttonRect.height);
+            }
+
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = `${newX}px`;
+            noBtn.style.top = `${newY}px`;
+        });
+
+        // Initialize positions for physics
+        photo1Container.style.left = '0px'; // Initial CSS left/top will be overwritten by transform
+        photo1Container.style.top = '0px';
+        photo2Container.style.left = '0px';
+        photo2Container.style.top = '0px';
+
+        // Set initial photo positions correctly
+        // This is important because photoPos needs to reflect the starting visual
+        window.addEventListener('load', () => {
+            const initialPhoto1Rect = photo1Container.getBoundingClientRect();
+            const initialPhoto2Rect = photo2Container.getBoundingClientRect();
+            photo1Pos = { x: initialPhoto1Rect.left, y: initialPhoto1Rect.top };
+            photo2Pos = { x: initialPhoto2Rect.left, y: initialPhoto2Rect.top };
+
+            // Start the physics loop
+            requestAnimationFrame(updatePhysics);
+        });
+
+        // Handle window resizing
+        window.addEventListener('resize', () => {
+            // Re-contain photos if they go out of bounds on resize
+            containPhoto(photo1Pos, photo1Vel);
+            containPhoto(photo2Pos, photo2Vel);
+        });
+
+    </script>
 </body>
 </html>
